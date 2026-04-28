@@ -1,5 +1,7 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import {
   createHomeworkPost,
   createPaymentPost,
@@ -19,11 +21,15 @@ export async function submitHomeworkAction(input: {
   deadlineDate?: string | null;
   deadlineCustom?: string | null;
 }) {
-  return createHomeworkPost(input);
+  const result = await createHomeworkPost(input);
+  revalidatePath('/');
+  return result;
 }
 
 export async function submitPaymentAction(input: { title: string; description?: string; priceCents: number }) {
-  return createPaymentPost(input);
+  const result = await createPaymentPost(input);
+  revalidatePath('/payments');
+  return result;
 }
 
 export async function updateHomeworkAction(input: {
@@ -35,19 +41,27 @@ export async function updateHomeworkAction(input: {
   deadlineDate?: string | null;
   deadlineCustom?: string | null;
 }) {
-  return updateHomeworkPost(input);
+  const result = await updateHomeworkPost(input);
+  revalidatePath('/');
+  return result;
 }
 
 export async function deleteHomeworkAction(input: { id: string }) {
-  return deleteHomeworkPost(input);
+  const result = await deleteHomeworkPost(input);
+  revalidatePath('/');
+  return result;
 }
 
 export async function updatePaymentAction(input: { id: string; title: string; description?: string; priceCents: number }) {
-  return updatePaymentPost(input);
+  const result = await updatePaymentPost(input);
+  revalidatePath('/payments');
+  return result;
 }
 
 export async function deletePaymentAction(input: { id: string }) {
-  return deletePaymentPost(input);
+  const result = await deletePaymentPost(input);
+  revalidatePath('/payments');
+  return result;
 }
 
 export async function togglePaymentChecklistAction(input: {
@@ -55,5 +69,7 @@ export async function togglePaymentChecklistAction(input: {
   name: PaymentParticipantName;
   isPaid: boolean;
 }) {
-  return togglePaymentChecklistEntry(input);
+  const result = await togglePaymentChecklistEntry(input);
+  revalidatePath('/payments');
+  return result;
 }
