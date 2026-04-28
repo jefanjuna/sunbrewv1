@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  @apply bg-slate-950 text-slate-100 antialiased;
+  font-family: var(--font-body), sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(251, 146, 60, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(34, 211, 238, 0.14), transparent 32%),
+    radial-gradient(circle at bottom, rgba(255, 255, 255, 0.06), transparent 42%),
+    linear-gradient(180deg, #04060d 0%, #070b15 48%, #04060d 100%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 92%);
+  opacity: 0.65;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), sans-serif;
+  letter-spacing: -0.04em;
+}
+
+::selection {
+  background: rgba(251, 146, 60, 0.32);
+  color: white;
+}
+
+* {
+  scrollbar-color: rgba(255, 255, 255, 0.25) rgba(255, 255, 255, 0.06);
+  scrollbar-width: thin;
+}
+
+@layer components {
+  .sunbrew-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .sunbrew-panel {
+    @apply rounded-[1.75rem] border border-white/10 bg-slate-950/70 shadow-[0_20px_80px_rgba(0,0,0,0.34)] backdrop-blur-xl;
+  }
+
+  .sunbrew-card {
+    @apply rounded-[1.5rem] border border-white/10 bg-white/5 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/10;
+  }
+
+  .sunbrew-input {
+    @apply w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-slate-100 outline-none placeholder:text-slate-500 focus:border-orange-400/60 focus:ring-2 focus:ring-orange-400/20;
+  }
+
+  .sunbrew-select {
+    @apply w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-slate-100 outline-none focus:border-orange-400/60 focus:ring-2 focus:ring-orange-400/20;
+  }
+
+  .sunbrew-textarea {
+    @apply min-h-[7rem] w-full resize-none rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-slate-100 outline-none placeholder:text-slate-500 focus:border-orange-400/60 focus:ring-2 focus:ring-orange-400/20;
+  }
+
+  .sunbrew-label {
+    @apply text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-slate-400;
+  }
+
+  .sunbrew-chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-200 transition hover:border-white/20 hover:bg-white/10;
+  }
+
+  .sunbrew-chip-active {
+    @apply border-orange-400/40 bg-orange-400/20 text-orange-100;
+  }
+
+  .sunbrew-button {
+    @apply inline-flex items-center justify-center rounded-2xl px-4 py-3 text-sm font-semibold transition;
+  }
+
+  .sunbrew-button-primary {
+    @apply inline-flex items-center justify-center rounded-2xl px-4 py-3 text-sm font-semibold text-slate-950 transition bg-gradient-to-r from-orange-400 via-amber-400 to-cyan-300 shadow-[0_10px_30px_rgba(251,146,60,0.28)] hover:brightness-110;
+  }
+
+  .sunbrew-button-ghost {
+    @apply inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-slate-100 transition hover:border-white/20 hover:bg-white/10;
+  }
+
+  .sunbrew-muted {
+    @apply text-sm leading-6 text-slate-300;
+  }
+}

@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum HomeworkSubject {
+  GENERAL_PAPER
+  PROJECT_WORK
+  PHYSICS
+  COMPUTING
+  MATHEMATICS
+  ECONOMICS
+  HISTORY
+  LITERATURE
+  CHINESE
+  TAMIL
+}
+
+enum HomeworkDeadlineKind {
+  DATE
+  CUSTOM
+  NO_DATE
+}
+
+model HomeworkPost {
+  id             String               @id @default(uuid())
+  title          String
+  description    String?
+  subject        HomeworkSubject
+  deadlineKind   HomeworkDeadlineKind
+  deadlineDate   DateTime?
+  deadlineCustom String?
+  createdAt      DateTime             @default(now())
+}
+
+model PaymentPost {
+  id          String              @id @default(uuid())
+  title       String
+  description String?
+  priceCents  Int
+  createdAt   DateTime            @default(now())
+  checklist   PaymentChecklist[]
+}
+
+model PaymentChecklist {
+  id            String      @id @default(uuid())
+  paymentPostId String
+  paymentPost   PaymentPost @relation(fields: [paymentPostId], references: [id], onDelete: Cascade)
+  name          String
+  isPaid        Boolean     @default(false)
+  paidAt        DateTime?
+
+  @@unique([paymentPostId, name])
+}
