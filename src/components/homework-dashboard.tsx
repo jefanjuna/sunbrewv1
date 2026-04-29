@@ -258,23 +258,26 @@ export function HomeworkDashboard({ initialHomework }: HomeworkDashboardProps) {
             })}
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <p className="sunbrew-label mr-2">Deadline filters</p>
-            {homeworkDeadlineKinds.map((kind) => {
-              const active = selectedKinds.includes(kind);
-              const label = kind === 'date' ? 'Date' : kind === 'custom' ? 'Custom date' : 'No date';
+          <div className="flex flex-col items-start gap-3">
+            <p className="sunbrew-label">Deadline filters</p>
 
-              return (
-                <button
-                  key={kind}
-                  type="button"
-                  className={active ? 'sunbrew-chip sunbrew-chip-active' : 'sunbrew-chip'}
-                  onClick={() => toggleKindFilter(kind)}
-                >
-                  {label}
-                </button>
-              );
-            })}
+            <div className="flex flex-wrap gap-2">
+              {homeworkDeadlineKinds.map((kind) => {
+                const active = selectedKinds.includes(kind);
+                const label = kind === 'date' ? 'Date' : kind === 'custom' ? 'Custom date' : 'No date';
+
+                return (
+                  <button
+                    key={kind}
+                    type="button"
+                    className={active ? 'sunbrew-chip sunbrew-chip-active' : 'sunbrew-chip'}
+                    onClick={() => toggleKindFilter(kind)}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">

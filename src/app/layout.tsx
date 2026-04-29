@@ -18,7 +18,7 @@ const bodyFont = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'SUNBREW',
+  title: 'Sunbrew',
   description: 'A cinematic homework and payment bulletin board for class use.'
 };
 
